@@ -13,6 +13,9 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { GameControlComponent } from './game/game-control/game-control.component';
 import { OddComponent } from './game/odd/odd.component';
 import { EvenComponent } from './game/even/even.component';
+import {BasicHighlightDirective} from './game/directive/basic/basic-highlight.directive';
+import { BetterHighlightDirective } from './game/directive/better/better-highlight.directive';
+import {AppDropdownDirective} from './sheard/app-dropdown.directive';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import { EvenComponent } from './game/even/even.component';
     ShoppingEditComponent,
     GameControlComponent,
     OddComponent,
-    EvenComponent
+    EvenComponent,
+    BasicHighlightDirective,
+    BetterHighlightDirective,
+    AppDropdownDirective
   ],
   imports: [
     BrowserModule
