@@ -16,6 +16,7 @@ import { EvenComponent } from './game/even/even.component';
 import {BasicHighlightDirective} from './game/directive/basic/basic-highlight.directive';
 import { BetterHighlightDirective } from './game/directive/better/better-highlight.directive';
 import {AppDropdownDirective} from './sheard/app-dropdown.directive';
+import {ShoppingListService} from "./shopping-list/shopping-list.service";
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import {AppDropdownDirective} from './sheard/app-dropdown.directive';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [ShoppingListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

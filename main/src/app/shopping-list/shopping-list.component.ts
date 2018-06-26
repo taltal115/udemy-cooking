@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Ingrediant} from '../sheard/ingrediant.model';
+import {ShoppingListService} from "./shopping-list.service";
 
 @Component({
   selector: 'app-shopping-list',
@@ -7,19 +8,16 @@ import {Ingrediant} from '../sheard/ingrediant.model';
   styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent implements OnInit {
-  ingredients: Ingrediant[] = [
-    new Ingrediant('salt', 5),
-    new Ingrediant('tomato', 5)
-  ];
-  @Input() selected: string;
+  // @Input() selected: string;
+  ingredients: Ingrediant[];
 
-  constructor() { }
+  constructor(private slService: ShoppingListService) { }
 
   ngOnInit() {
+    this.ingredients = this.slService.getShoppingList();
+    this.slService.ingrediantChange.
+      subscribe(
+      (ing: Ingrediant[]) => this.ingredients = ing
+    )
   }
-  newElement(ing: Ingrediant) {
-    console.log(ing);
-    this.ingredients.push(ing);
-  }
-
 }
