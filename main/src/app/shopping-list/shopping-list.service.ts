@@ -1,20 +1,26 @@
-import {Ingrediant} from "../sheard/ingrediant.model";
-import {EventEmitter} from "@angular/core";
+import {Ingredient} from "../sheard/ingredient.model";
+import {EventEmitter, Injectable} from "@angular/core";
 
+@Injectable()
 export class ShoppingListService {
-  ingrediantChange = new EventEmitter<Ingrediant[]>();
-  private ingredients: Ingrediant[] = [
-    new Ingrediant('salt', 5),
-    new Ingrediant('tomato', 5)
+  ingredientChange = new EventEmitter<Ingredient[]>();
+  private ingredients: Ingredient[] = [
+    new Ingredient('salt', 5),
+    new Ingredient('tomato', 5)
   ];
 
   getShoppingList() {
     return this.ingredients.slice();
   }
 
-  newElement(ing: Ingrediant) {
+  newElement(ing: Ingredient) {
     console.log(ing);
     this.ingredients.push(ing);
-    this.ingrediantChange.emit(this.ingredients.slice());
+    this.ingredientChange.emit(this.ingredients.slice());
+  }
+
+  addIngredients(ingredients: Ingredient[]){
+    this.ingredients.push(...ingredients);
+    this.ingredientChange.emit(this.ingredients.slice())
   }
 }

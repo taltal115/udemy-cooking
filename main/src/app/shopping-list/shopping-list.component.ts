@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Ingrediant} from '../sheard/ingrediant.model';
+import {Ingredient} from '../sheard/ingredient.model';
 import {ShoppingListService} from "./shopping-list.service";
 
 @Component({
@@ -9,15 +9,14 @@ import {ShoppingListService} from "./shopping-list.service";
 })
 export class ShoppingListComponent implements OnInit {
   // @Input() selected: string;
-  ingredients: Ingrediant[];
+  ingredients: Ingredient[];
 
   constructor(private slService: ShoppingListService) { }
 
   ngOnInit() {
     this.ingredients = this.slService.getShoppingList();
-    this.slService.ingrediantChange.
-      subscribe(
-      (ing: Ingrediant[]) => this.ingredients = ing
-    )
+    this.slService.ingredientChange.subscribe(
+      (ing: Ingredient[]) => this.ingredients = ing
+    );
   }
 }

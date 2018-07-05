@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {Ingrediant} from '../../sheard/ingrediant.model';
+import {Ingredient} from '../../sheard/ingredient.model';
 import {ShoppingListService} from "../shopping-list.service";
 
 @Component({
@@ -18,6 +18,6 @@ export class ShoppingEditComponent implements OnInit {
 
   onAddItem() {
     // this.OnNewElement.emit();
-    this.slService.newElement(new Ingrediant(this.nameInputRef.nativeElement.value, this.amountInputRef.nativeElement.value))
+    this.slService.newElement(new Ingredient(this.nameInputRef.nativeElement.value, this.amountInputRef.nativeElement.value))
   }
 }
