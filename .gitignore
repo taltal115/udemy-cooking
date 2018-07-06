@@ -1,2 +1,5 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 .idea/*
+routing-start/node_modules
+main/node_modules
+services-assignment-start/node_modules
