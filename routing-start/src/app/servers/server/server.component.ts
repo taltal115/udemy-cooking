@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import {ActivatedRoute, Data, Params, Router} from "@angular/router";
 
 @Component({
   selector: 'app-server',
@@ -17,24 +17,25 @@ export class ServerComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    console.log(typeof this.route.snapshot.params['id'])
-    console.log(typeof +this.route.snapshot.params['id'])
-    this.server = this.serversService.getServer(+this.route.snapshot.params['id']);
-    console.log(this.server)
-
-    // this.server = {
-    //   id: this.route.snapshot.params['id'],
-    //   name: this.route.snapshot.params['name']
-    // };
-    this.route.params
-      .subscribe((params: Params) => {
-        console.log(params)
-        this.server = this.serversService.getServer(+params.id);
-
-        // this.server.id = params['id'];
-        // this.server.name = params['name'];
-        // this.server.status = params['status'];
-      });
+    // console.log(typeof this.route.snapshot.params['id'])
+    // console.log(typeof +this.route.snapshot.params['id'])
+    // this.server = this.serversService.getServer(+this.route.snapshot.params['id']);
+    // console.log(this.server)
+    // this.route.params
+      // .subscribe((params: Params) => {
+      //   console.log(params)
+      //   this.server = this.serversService.getServer(+params.id);
+      //
+      //   // this.server.id = params['id'];
+      //   // this.server.name = params['name'];
+      //   // this.server.status = params['status'];
+      // });
+    this.route.data
+      .subscribe(
+        (data: Data) => {
+          this.server = data['server']
+        }
+      )
   }
 
   onEdit() {
