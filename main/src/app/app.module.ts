@@ -17,6 +17,8 @@ import {BasicHighlightDirective} from './game/directive/basic/basic-highlight.di
 import { BetterHighlightDirective } from './game/directive/better/better-highlight.directive';
 import {AppDropdownDirective} from './sheard/app-dropdown.directive';
 import {ShoppingListService} from "./shopping-list/shopping-list.service";
+import {AppRoutingModule} from "./app-routing.module";
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 
 
 @NgModule({
@@ -34,10 +36,12 @@ import {ShoppingListService} from "./shopping-list/shopping-list.service";
     EvenComponent,
     BasicHighlightDirective,
     BetterHighlightDirective,
-    AppDropdownDirective
+    AppDropdownDirective,
+    RecipeStartComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [ShoppingListService],
   bootstrap: [AppComponent]
