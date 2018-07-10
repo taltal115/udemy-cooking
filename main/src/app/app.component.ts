@@ -18,7 +18,4 @@ export class AppComponent {
       this.oddNumbers.push(fireNumber);
     }
   }
-  onNavChange(selection: string) {
-    this.selection = selection;
-  }
 }

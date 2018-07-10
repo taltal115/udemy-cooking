@@ -17,8 +17,9 @@ import {BasicHighlightDirective} from './game/directive/basic/basic-highlight.di
 import { BetterHighlightDirective } from './game/directive/better/better-highlight.directive';
 import {AppDropdownDirective} from './sheard/app-dropdown.directive';
 import {ShoppingListService} from "./shopping-list/shopping-list.service";
+import { StartRecipeComponent } from './recipes/start-recipe/start-recipe.component';
 import {AppRoutingModule} from "./app-routing.module";
-import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
     BasicHighlightDirective,
     BetterHighlightDirective,
     AppDropdownDirective,
-    RecipeStartComponent
+    StartRecipeComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
