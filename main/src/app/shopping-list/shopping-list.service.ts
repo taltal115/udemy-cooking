@@ -1,9 +1,10 @@
 import {Ingredient} from "../sheard/ingredient.model";
-import {EventEmitter, Injectable} from "@angular/core";
+import {Injectable} from "@angular/core";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class ShoppingListService {
-  ingredientChange = new EventEmitter<Ingredient[]>();
+  ingredientChange = new Subject<Ingredient[]>();
   private ingredients: Ingredient[] = [
     new Ingredient('salt', 5),
     new Ingredient('tomato', 5)
@@ -16,11 +17,11 @@ export class ShoppingListService {
   newElement(ing: Ingredient) {
     console.log(ing);
     this.ingredients.push(ing);
-    this.ingredientChange.emit(this.ingredients.slice());
+    this.ingredientChange.next(this.ingredients.slice());
   }
 
   addIngredients(ingredients: Ingredient[]){
     this.ingredients.push(...ingredients);
-    this.ingredientChange.emit(this.ingredients.slice())
+    this.ingredientChange.next(this.ingredients.slice())
   }
 }
