@@ -22,6 +22,8 @@ import { StartRecipeComponent } from './recipes/start-recipe/start-recipe.compon
 import {AppRoutingModule} from "./app-routing.module";
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import {RecipeService} from './recipes/recipe.service';
+import {HttpModule} from '@angular/http';
+import {DataStorageService} from './sheard/data-storage.service';
 
 
 @NgModule({
@@ -47,11 +49,13 @@ import {RecipeService} from './recipes/recipe.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpModule,
     ReactiveFormsModule
   ],
   providers: [
     ShoppingListService,
-    RecipeService
+    RecipeService,
+    DataStorageService
   ],
   bootstrap: [AppComponent]
 })
