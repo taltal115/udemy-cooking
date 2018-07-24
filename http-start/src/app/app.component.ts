@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ServersService} from './servers.service';
+import {Response} from '@angular/http';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,7 @@ import {ServersService} from './servers.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  appName = this.serverService.getAppName();
   servers = [
     {
       name: 'Testserver',
@@ -31,6 +33,13 @@ export class AppComponent {
     this.serverService.storeServers(this.servers)
       .subscribe(
         (response) => console.log(response),
+        (error) => console.error(error)
+      );
+  }
+  onGet() {
+    this.serverService.getServers()
+      .subscribe(
+        (servers: any[]) => this.servers = servers,
         (error) => console.error(error)
       );
   }
