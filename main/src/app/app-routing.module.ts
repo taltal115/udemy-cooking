@@ -6,6 +6,7 @@ import {RecipeDetailComponent} from "./recipes/recipe-detail/recipe-detail.compo
 import {ShoppingListComponent} from "./shopping-list/shopping-list.component";
 import {StartRecipeComponent} from "./recipes/start-recipe/start-recipe.component";
 import {RecipeEditComponent} from "./recipes/recipe-edit/recipe-edit.component";
+import {SignupComponent} from "./auth/signup/signup.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: "full" },
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
     //   { path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivatedGuard]}
     // ]
   },
+  { path: "signup", component: SignupComponent},
   // { path: "not-found", component: PageNotFoundComponent},
   // { path: "not-found", component: ErrorPageComponent, data: {message: 'Page not found!'}},
   // { path: "**", redirectTo: '/not-found'}

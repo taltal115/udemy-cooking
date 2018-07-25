@@ -26,4 +26,8 @@ export class HeaderComponent implements OnInit {
         (error: Response) => console.log(error)
       );
   }
+
+  onFetchData() {
+    this.dataStorage.getRecipes();
+  }
 }

@@ -24,6 +24,8 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import {RecipeService} from './recipes/recipe.service';
 import {HttpModule} from '@angular/http';
 import {DataStorageService} from './sheard/data-storage.service';
+import { SignupComponent } from './auth/signup/signup.component';
+import { LoginComponent } from './auth/login/login.component';
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import {DataStorageService} from './sheard/data-storage.service';
     BetterHighlightDirective,
     AppDropdownDirective,
     StartRecipeComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    SignupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
