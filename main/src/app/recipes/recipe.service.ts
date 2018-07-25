@@ -1,69 +1,63 @@
-import {Recipe} from "./recipe.model";
-import {Injectable} from "@angular/core";
-import {Ingredient} from "../sheard/ingredient.model";
-import {ShoppingListService} from "../shopping-list/shopping-list.service";
-import {Subject} from "rxjs/Subject";
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+
+import { Recipe } from './recipe.model';
+import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 @Injectable()
 export class RecipeService {
-  recipeChanged = new Subject<Recipe[]>();
-
+  recipesChanged = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
     new Recipe(
-      'Test recipe',
-      'desc',
-      'https://imagesvc.timeincapp.com/v3/mm/image?url=http%3A%2F%2Fcdn-image.myrecipes.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F4_3_horizontal_-_1200x900%2Fpublic%2F1506120378%2FMR_0917170472.jpg%3Fitok%3DKPTNrvis&w=300&h=167&c=sc&poi=face&q=85',
+      'Tasty Schnitzel',
+      'A super-tasty Schnitzel - just awesome!',
+      'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
       [
-        new Ingredient('salt',2),
-        new Ingredient('paper',3)
-      ]
-    )
-    , new Recipe(
-      'Bif Welington',
-      'The amazing Bif Welington',
-      'https://i.ytimg.com/vi/5OAiZYjRqfo/maxresdefault.jpg',
+        new Ingredient('Meat', 1),
+        new Ingredient('French Fries', 20)
+      ]),
+    new Recipe('Big Fat Burger',
+      'What else you need to say?',
+      'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
       [
-        new Ingredient('fillet',3),
-        new Ingredient('flower',2),
-        new Ingredient('mushrooms',2)
-      ]
-    )
+        new Ingredient('Buns', 2),
+        new Ingredient('Meat', 1)
+      ])
   ];
 
-  constructor(
-    private slService: ShoppingListService
-    ){}
+  constructor(private slService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();
   }
 
-  getRecipe(id: number) {
-    return this.recipes[id];
+  getRecipe(index: number) {
+    return this.recipes[index];
   }
 
-  setRecipes(recipes: Recipe[]) {
-    this.recipes = recipes;
-    this.recipeChanged.next(this.recipes.slice());
-  }
-
-  addIngredientsToShoppingList(ingredients: Ingredient[]){
-    this.slService.addIngredients(ingredients)
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.slService.addIngredients(ingredients);
   }
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
-    this.recipeChanged.next(this.recipes.slice());
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
-    this.recipeChanged.next(this.recipes.slice());
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   deleteRecipe(index: number) {
     this.recipes.splice(index, 1);
-    this.recipeChanged.next(this.recipes.slice());
+    this.recipesChanged.next(this.recipes.slice());
   }
 }

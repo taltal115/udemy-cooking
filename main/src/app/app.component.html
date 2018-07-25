@@ -1,5 +1,4 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<app-header></app-header>
+<app-header (featureSelected)="onNavigate($event)"></app-header>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -7,22 +6,3 @@
     </div>
   </div>
 </div>
-
-
-<!--<div class="container">-->
-  <!--<div class="row">-->
-    <!--<div class="col-md-12">-->
-      <!--<app-game-control-->
-        <!--(incrementEvent)="onIntFire($event)"></app-game-control>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="row">-->
-    <!--<div class="col-md-12">-->
-      <!--<app-odd *ngFor="let oddNumber of oddNumbers" [number]="oddNumber"></app-odd>-->
-      <!--<app-even *ngFor="let evenNumber of evenNumbers" [number]="evenNumber"></app-even>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<p appBasicHighlight>i am a basic directive</p>-->
-  <!--<p appBetterHighlight [dc]="'red'">i am a better directive</p>-->
-<!--</div>-->
-

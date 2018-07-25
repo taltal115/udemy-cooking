@@ -1,33 +1,32 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {DataStorageService} from '../sheard/data-storage.service';
-import {Response} from '@angular/http';
+import { Component } from '@angular/core';
+import { Response } from '@angular/http';
+
+import { DataStorageService } from '../shared/data-storage.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit {
-  constructor(private dataStorage: DataStorageService) { }
+export class HeaderComponent {
+  constructor(private dataStorageService: DataStorageService,
+              private authService: AuthService) {
+  }
 
-  ngOnInit() {
-  }
-  onSelect(selection: string) {
-    console.log(selection);
-  }
   onSaveData() {
-    this.dataStorage.storeRecipe()
+    this.dataStorageService.storeRecipes()
       .subscribe(
         (response: Response) => {
-          const data = response.json();
-          console.log(data);
-          return data;
-        },
-        (error: Response) => console.log(error)
+          console.log(response);
+        }
       );
   }
 
   onFetchData() {
-    this.dataStorage.getRecipes();
+    this.dataStorageService.getRecipes();
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 }

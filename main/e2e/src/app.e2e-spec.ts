@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('udemy-ng6-cooking-app App', () => {
+describe('workspace-project App', () => {
   let page: AppPage;
 
   beforeEach(() => {

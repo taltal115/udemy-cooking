@@ -1,8 +1,14 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Ingredient} from '../../sheard/ingredient.model';
-import {ShoppingListService} from "../shopping-list.service";
-import {NgForm} from "@angular/forms";
-import {Subscription} from "rxjs/Subscription";
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild
+} from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
+
+import { Ingredient } from '../../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -19,45 +25,44 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   constructor(private slService: ShoppingListService) { }
 
   ngOnInit() {
-    this.subscription = this.slService.startedEditing.subscribe(
-      (i: number) => {
-        this.editedItemIndex = i;
-        this.editMode = true;
-        this.editedItem = this.slService.getIngredient(i)
-        console.log(this.editedItem)
-        this.slForm.setValue({
-          name: this.editedItem.name,
-          amount: this.editedItem.amount,
-        })
-      }
-    )
+    this.subscription = this.slService.startedEditing
+      .subscribe(
+        (index: number) => {
+          this.editedItemIndex = index;
+          this.editMode = true;
+          this.editedItem = this.slService.getIngredient(index);
+          this.slForm.setValue({
+            name: this.editedItem.name,
+            amount: this.editedItem.amount
+          })
+        }
+      );
   }
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    console.log(form.value);
     const newIngredient = new Ingredient(value.name, value.amount);
-    if(this.editMode) {
+    if (this.editMode) {
       this.slService.updateIngredient(this.editedItemIndex, newIngredient);
     } else {
-      this.slService.newIngredient(newIngredient)
+      this.slService.addIngredient(newIngredient);
     }
-    form.reset();
     this.editMode = false;
+    form.reset();
   }
 
-  onClearForm() {
+  onClear() {
     this.slForm.reset();
     this.editMode = false;
   }
 
-  onDeleteForm() {
-    console.log(this.editedItemIndex);
+  onDelete() {
     this.slService.deleteIngredient(this.editedItemIndex);
-    this.onClearForm();
+    this.onClear();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
 }
