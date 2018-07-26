@@ -22,6 +22,7 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
+          localStorage.setItem('currentUser', JSON.stringify(response));
           this.router.navigate(['/']);
           firebase.auth().currentUser.getToken()
             .then(
@@ -35,6 +36,7 @@ export class AuthService {
   }
 
   logout() {
+    localStorage.removeItem('currentUser');
     firebase.auth().signOut();
     this.token = null;
     this.router.navigate(['/signin']);
@@ -46,6 +48,10 @@ export class AuthService {
         (token: string) => this.token = token
       );
     return this.token;
+  }
+
+  setToken(token: string) {
+    this.token = token;
   }
 
   isAuthenticated() {
