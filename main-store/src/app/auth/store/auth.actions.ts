@@ -37,7 +37,7 @@ export class StopEdit implements Action {
   readonly type = STOP_EDIT;
 }
 
-export type ShoppingListActions =
+export type AuthActions =
     AddIngredient |
     AddIngredients |
     UpdateIngredient |
