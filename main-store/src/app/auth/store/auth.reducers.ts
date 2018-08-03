@@ -1,73 +1,33 @@
-import * as ShoppingListActions from './auth.actions';
-
-import {Ingredient} from '../../shared/ingredient.model';
-
-export interface AppState {
-  shoppingList: State
-}
+import * as AuthActions from './auth.actions';
 
 export interface State {
-  ingredients: Ingredient[],
-  editedIngredient: Ingredient,
-  editedIngredientIndex: number
+  token: string;
+  authenticated: boolean;
 }
 
 const initialState: State = {
-  ingredients: [
-    new Ingredient('Apple', 5),
-    new Ingredient('Tomatoes', 10)
-  ],
-  editedIngredient: null,
-  editedIngredientIndex: -1
+  token: null,
+  authenticated: false
 };
 
-export function shoppingListReducer(state = initialState , action: ShoppingListActions.AuthActions) {
+export function authReducer(state = initialState , action: AuthActions.AuthActions) {
   switch(action.type) {
-    case ShoppingListActions.ADD_INGREDIENT:
+    case AuthActions.SIGNUP:
+    case AuthActions.SIGNIN:
       return {
         ...state,
-        ingredients: [...state.ingredients, action.payload]
+        authenticated: true
       };
-    case ShoppingListActions.ADD_INGREDIENTS:
+    case AuthActions.LOGOUT:
       return {
         ...state,
-        ingredients: [...state.ingredients, ...action.payload]
+        token: null,
+        authenticated: false
       };
-    case ShoppingListActions.UPDATE_INGREDIENT:
-      const ingredient = state.ingredients[state.editedIngredientIndex];
-      const updatedIngredient = {
-        ...ingredient,
-        ...action.payload.ingredient
-      };
-      const ingredients = [...state.ingredients];
-      ingredients[state.editedIngredientIndex] = updatedIngredient;
+    case AuthActions.SET_TOKEN:
       return {
         ...state,
-        ingredients: ingredients,
-        editedIngredient: null,
-        editedIngredientIndex: -1
-      };
-    case ShoppingListActions.DELETE_INGREDIENT:
-      const oldIngredients = [...state.ingredients];
-      oldIngredients.splice(state.editedIngredientIndex, 1);
-      return {
-        ...state,
-        ingredients: oldIngredients,
-        editedIngredient: null,
-        editedIngredientIndex: -1
-      };
-    case ShoppingListActions.START_EDIT:
-      const editedIngredient = { ...state.ingredients[action.payload]};
-      return {
-        ...state,
-        editedIngredient: editedIngredient,
-        editedIngredientIndex: action.payload
-      };
-    case ShoppingListActions.STOP_EDIT:
-      return {
-        ...state,
-        editedIngredient: null,
-        editedIngredientIndex: -1
+        token: action.payload
       };
     default:
       return state;

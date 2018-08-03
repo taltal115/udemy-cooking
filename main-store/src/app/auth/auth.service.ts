@@ -1,17 +1,37 @@
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import * as fromApp from '../store/app.reducers'
+import * as AuthActions from './store/auth.actions'
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class AuthService {
-  token: string;
+export class AuthService implements OnInit{
+  authState: Observable<any>;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private store: Store<fromApp.AppState>
+  ) {}
+
+  ngOnInit() {
+    this.authState = this.store.select('auth');
+  }
 
   signupUser(email: string, password: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(
-        () => this.router.navigate(['/signin'])
+        user => {
+          this.store.dispatch(new AuthActions.Signup());
+          this.router.navigate(['/signin'])
+          firebase.auth().currentUser.getToken()
+            .then(
+              (token: string) => {
+                this.store.dispatch(new AuthActions.SetToken(token));
+              }
+            )
+        }
       )
       .catch(
         error => console.log(error)
@@ -22,11 +42,14 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
+          this.store.dispatch(new AuthActions.Signin());
           localStorage.setItem('currentUser', JSON.stringify(response));
           this.router.navigate(['/']);
           firebase.auth().currentUser.getToken()
             .then(
-              (token: string) => this.token = token
+              (token: string) => {
+                this.store.dispatch(new AuthActions.SetToken(token));
+              }
             )
         }
       )
@@ -36,25 +59,9 @@ export class AuthService {
   }
 
   logout() {
+    this.store.dispatch(new AuthActions.Logout());
     localStorage.removeItem('currentUser');
     firebase.auth().signOut();
-    this.token = null;
     this.router.navigate(['/signin']);
-  }
-
-  getToken() {
-    firebase.auth().currentUser.getToken()
-      .then(
-        (token: string) => this.token = token
-      );
-    return this.token;
-  }
-
-  setToken(token: string) {
-    this.token = token;
-  }
-
-  isAuthenticated() {
-    return this.token != null;
   }
 }
