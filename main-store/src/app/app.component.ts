@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
     if(currentUser) {
       const accessToken = JSON.parse(currentUser).stsTokenManager.accessToken;
       this.store.dispatch(new AuthActions.SetToken(accessToken));
-      // this.authService.setToken(accessToken);
       console.log(accessToken);
     }
   }

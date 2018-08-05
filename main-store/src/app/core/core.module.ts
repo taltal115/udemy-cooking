@@ -5,7 +5,6 @@ import {HomeComponent} from "./home/home.component";
 import {HeaderComponent} from "./header/header.component";
 import {AppRoutingModule} from "../app-routing.module";
 import {SharedModules} from "../shared/shared.modules";
-import {AuthService} from "../auth/auth.service";
 import {RecipeService} from "../recipes/recipe.service";
 import {DataStorageService} from "../shared/data-storage.service";
 import {AuthInterceptor} from "../shared/auth.interceptor";
@@ -27,7 +26,6 @@ import {LoginInterceptor} from "../shared/login.interceptor";
   providers: [
     RecipeService,
     DataStorageService,
-    AuthService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true}
   ]
