@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Ingredient } from '../shared/ingredient.model';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import * as ShoppingListActions from './store/shopping-list.actions'
 import * as fromApp from './../store/app.reducers'
 
