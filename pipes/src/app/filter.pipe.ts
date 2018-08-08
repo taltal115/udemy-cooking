@@ -20,3 +20,14 @@ export class FilterPipe implements PipeTransform {
   }
 
 }
+@Pipe({
+  name: 'reverse',
+  // pure: false
+})
+export class ReversPipe implements PipeTransform {
+
+  transform(value: any, filterString: string, propName: string): any {
+    return value.split("").reverse().join("");
+  }
+
+}
